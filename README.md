@@ -499,17 +499,17 @@ footer {
 
     <button class="btn secondary"
       onclick="jawab(false)">
-      A. Mencoret dinding gua
+      A. Membuang sempah di area gua
     </button>
 
     <button class="btn secondary"
       onclick="jawab(true)">
-      B. Menjaga kebersihan dan mengikuti panduan
+      B. Merusak ornamen gua
     </button>
 
     <button class="btn secondary"
       onclick="jawab(false)">
-      C. Mengambil ornamen gua
+      C. Mencoret ornamen gua
     </button>
 
     <p id="hasil"></p>
