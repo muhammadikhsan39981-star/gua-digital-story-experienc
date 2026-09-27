@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071426">
+<title>Gua Digital Story Experience</title>
+<style>
+:root{--bg:#071426;--panel:#10233b;--blue:#42c8ff;--purple:#9b72ff;--text:#f3f7ff;--muted:#a9bad0}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#071426,#0b1b31 55%,#071426);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);line-height:1.5}
+header{position:sticky;top:0;z-index:5;background:rgba(7,20,38,.92);backdrop-filter:blur(12px);border-bottom:1px solid #233b57;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:800;font-size:14px;letter-spacing:.3px}.brand span{color:var(--blue)}
+.menu{border:1px solid #34516e;background:#10233b;color:white;border-radius:10px;padding:8px 11px;font-size:18px}
+main{max-width:760px;margin:auto;padding:16px}
+.hero{position:relative;overflow:hidden;border-radius:24px;min-height:430px;padding:24px 20px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(180deg,rgba(4,13,28,.04),rgba(4,13,28,.92)),radial-gradient(ellipse at 50% 38%,#1e83bb 0%,#14375c 27%,#0a1a30 57%,#050d19 100%);border:1px solid #24415e;box-shadow:0 18px 50px #0005}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(120deg,transparent 0 34px,#7bdfff0a 35px 36px),radial-gradient(ellipse at 50% 15%,#6ae5ff45,transparent 44%);pointer-events:none}
+.cave-art{position:absolute;inset:0;opacity:.9;overflow:hidden}
+.stalactite{position:absolute;top:0;width:18%;height:36%;background:linear-gradient(180deg,#263d55,#06101f);clip-path:polygon(0 0,100% 0,82% 72%,60% 100%,42% 63%,20% 83%)}
+.stalactite:nth-child(1){left:0;height:44%;width:25%}.stalactite:nth-child(2){left:29%;height:27%;width:17%}.stalactite:nth-child(3){right:0;height:48%;width:29%}.stalactite:nth-child(4){left:65%;height:25%;width:12%}
+.glow{position:absolute;left:20%;right:20%;bottom:22%;height:18%;background:#22bfff;filter:blur(45px);opacity:.5;border-radius:50%}
+.hero-content{position:relative;z-index:1}
+.eyebrow{display:inline-block;border:1px solid #55d8ff70;background:#0b2d4cbb;color:#a5eaff;border-radius:99px;padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+h1{font-size:clamp(30px,8vw,48px);line-height:1.05;margin:14px 0 12px;letter-spacing:-1.2px}
+p{margin:0 0 14px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px 16px;font-weight:800;font-size:14px;text-decoration:none;cursor:pointer}
+.primary{background:linear-gradient(100deg,var(--blue),#8a9dff);color:#061326;box-shadow:0 8px 25px #29bfff30}
+.secondary{background:#142b46;color:#eaf5ff;border:1px solid #365777}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+section{margin-top:28px;scroll-margin-top:80px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:14px}
+h2{font-size:23px;line-height:1.2;margin:0;letter-spacing:-.5px}
+.kicker{font-size:12px;color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.card{background:linear-gradient(145deg,#112842,#0c1d32);border:1px solid #29435f;border-radius:20px;padding:17px;margin-bottom:12px}
+.card h3{margin:0 0 7px;font-size:17px}.card p{font-size:14px;margin-bottom:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.feature{background:#10243b;border:1px solid #28425e;border-radius:18px;padding:15px}
+.feature .emoji{font-size:25px;margin-bottom:8px}.feature b{display:block;font-size:14px;margin-bottom:4px}.feature small{color:var(--muted);font-size:12px}
+.mapbox{height:250px;border-radius:18px;border:1px solid #355575;position:relative;overflow:hidden;background-color:#102d3b;background-image:linear-gradient(35deg,transparent 45%,#5c9d7955 46% 49%,transparent 50%),linear-gradient(120deg,transparent 30%,#70b18b33 31% 38%,transparent 39%),radial-gradient(ellipse at 50% 50%,#265f58,#183e46 50%,#102b3a 75%)}
+.river{position:absolute;left:-10%;top:48%;width:120%;height:30px;background:#48b9ed88;transform:rotate(-23deg);filter:blur(2px);border:1px solid #8ce5ff88}
+.pin{position:absolute;left:52%;top:42%;font-size:30px;filter:drop-shadow(0 4px 5px #000)}
+.maplabel{position:absolute;bottom:12px;left:12px;background:#061426df;padding:9px 12px;border-radius:12px;font-size:12px}
+.notice{font-size:12px;color:#9db4cb;margin-top:10px}
+.story-img{height:155px;border-radius:14px;margin-bottom:13px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 80%,#2dcaff88,transparent 45%),linear-gradient(150deg,#152f51,#050c1b)}
+.story-img:before{content:"";position:absolute;inset:0;background:linear-gradient(130deg,transparent 40%,#8d6aff44 41% 48%,transparent 49%),linear-gradient(40deg,transparent 45%,#45d9ff33 46% 52%,transparent 53%)}
+.story-img span{position:absolute;bottom:12px;left:13px;font-size:12px;background:#061426c9;padding:6px 10px;border-radius:9px}
+.story-controls{display:flex;align-items:center;gap:10px;margin-top:12px}
+.story-controls button{flex:1}
+.progress{height:5px;background:#29425e;border-radius:10px;overflow:hidden;margin-top:12px}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple));transition:width .4s}
+.quiz-options{display:grid;gap:9px;margin-top:12px}
+.quiz-options button{width:100%;text-align:left;background:#10243b;color:#eaf5ff;border:1px solid #34516e;border-radius:12px;padding:12px}
+footer{text-align:center;color:#7890a9;font-size:12px;padding:30px 12px 40px}
+nav.mobile-nav{position:fixed;bottom:0;left:0;right:0;z-index:10;display:flex;justify-content:space-around;background:#071426f2;border-top:1px solid #29415d;padding:8px 4px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}
+nav a{color:#a9bad0;text-decoration:none;font-size:10px;text-align:center;min-width:55px}
+nav a span{display:block;font-size:19px;margin-bottom:1px}
+.modal{display:none;position:fixed;inset:0;z-index:20;background:#020812eF;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}.modal-box{width:100%;max-width:420px;background:#10243b;border:1px solid #3b5a7b;border-radius:20px;padding:22px}
+.close{float:right;background:#203a57;border:0;color:white;border-radius:9px;padding:7px 11px}
+@media(min-width:650px){main{padding:24px}.hero{min-height:490px;padding:32px}.grid{grid-template-columns:repeat(4,1fr)}.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.story-grid .card{margin:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🌌 GUA <span>DIGITAL</span></div>
+  <button class="menu" aria-label="Buka menu" onclick="document.getElementById('jelajah').scrollIntoView({behavior:'smooth'})">☰</button>
+</header>
+<main>
+  <div class="hero" id="beranda">
+    <div class="cave-art"><i class="stalactite"></i><i class="stalactite"></i><i class="stalactite"></i><i class="stalactite"></i><div class="glow"></div></div>
+    <div class="hero-content">
+      <span class="eyebrow">Wisata • Cerita • Teknologi</span>
+      <h1>Jelajahi Dunia<br><span style="color:#7de4ff">di Balik Gua</span></h1>
+      <p>Rasakan petualangan digital melalui cerita, peta, dan visual gua yang memukau. Semua dalam satu website di HP kamu.</p>
+      <div class="actions">
+        <a class="btn primary" href="#jelajah">Mulai Jelajah ↗</a>
+        <a class="btn secondary" href="#cerita">▶ Dengarkan Cerita</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="jelajah">
+    <div class="section-head"><div><div class="kicker">Pilih pengalaman</div><h2>Jelajah Digital</h2></div></div>
+    <div class="grid">
+      <a class="feature" href="#peta" style="text-decoration:none;color:inherit"><div class="emoji">📍</div><b>Peta Gua</b><small>Lokasi dan titik menarik</small></a>
+      <a class="feature" href="#cerita" style="text-decoration:none;color:inherit"><div class="emoji">🎧</div><b>Storytelling</b><small>Dengarkan kisah gua</small></a>
+      <a class="feature" href="#mapping" style="text-decoration:none;color:inherit"><div class="emoji">✨</div><b>Digital Mapping</b><small>Simulasi visual interaktif</small></a>
+      <a class="feature" href="#kuis" style="text-decoration:none;color:inherit"><div class="emoji">🧭</div><b>Kuis Jelajah</b><small>Uji pengetahuanmu</small></a>
+    </div>
+  </section>
+
+  <section id="peta">
+    <div class="section-head"><div><div class="kicker">Temukan tujuanmu</div><h2>Peta Wisata Gua</h2></div></div>
+    <div class="mapbox" role="img" aria-label="Ilustrasi peta lokasi gua">
+      <div class="river"></div><div class="pin">📍</div>
+      <div class="maplabel">📍 Gua Wisata (lokasi demo)</div>
+    </div>
+    <p class="notice">Peta ini masih berupa ilustrasi prototype. Ganti dengan koordinat dan peta lokasi gua yang sebenarnya saat implementasi.</p>
+    <div class="actions"><button class="btn secondary" onclick="showModal('Lokasi Demo','Ini adalah titik contoh. Untuk peta nyata, tambahkan koordinat lokasi gua dan integrasikan peta online seperti OpenStreetMap atau Google Maps.')">Lihat detail lokasi</button></div>
+  </section>
+
+  <section id="cerita">
+    <div class="section-head"><div><div class="kicker">Dengarkan dan bayangkan</div><h2>Kisah di Balik Gua</h2></div></div>
+    <div class="card">
+      <div class="story-img"><span>Bab 01 • Pintu Alam</span></div>
+      <h3>Awal Sebuah Petualangan</h3>
+      <p id="narration">Di antara rimbunnya alam, tersembunyi sebuah gua yang menyimpan keindahan dan kisah masa lalu. Mari melangkah dengan rasa ingin tahu, tetap berhati-hati, dan menjaga alam.</p>
+      <div class="story-controls">
+        <button class="btn primary" id="audioBtn" onclick="toggleAudio()">▶ Putar Narasi</button>
+        <button class="btn secondary" onclick="nextStory()">Cerita berikutnya →</button>
+      </div>
+      <div class="progress"><div id="storyProgress"></div></div>
+      <p class="notice" id="storyCount">Cerita 1 dari 3 • Narasi menggunakan suara bawaan browser bila tersedia.</p>
+    </div>
+  </section>
+
+  <section id="mapping">
+    <div class="section-head"><div><div class="kicker">Visualisasi interaktif</div><h2>Digital Mapping</h2></div></div>
+    <div class="card">
+      <div class="story-img" id="mappingVisual" style="height:210px;background:radial-gradient(ellipse at 50% 75%,#22caffaa,transparent 40%),linear-gradient(145deg,#1a2856,#071426);">
+        <span id="mappingLabel">Mode: Cahaya Biru</span>
+      </div>
+      <p>Simulasi visual digital mapping. Pilih tema untuk melihat perubahan warna cahaya pada ilustrasi gua.</p>
+      <div class="actions">
+        <button class="btn secondary" onclick="setMapping('blue')">🔵 Biru</button>
+        <button class="btn secondary" onclick="setMapping('purple')">🟣 Ungu</button>
+        <button class="btn secondary" onclick="setMapping('aurora')">🌌 Aurora</button>
+      </div>
+      <p class="notice">Catatan: efek ini merupakan simulasi website, bukan proyeksi fisik ke dinding gua.</p>
+    </div>
+  </section>
+
+  <section id="kuis">
+    <div class="section-head"><div><div class="kicker">Uji pengetahuan</div><h2>Kuis Penjelajah</h2></div></div>
+    <div class="card">
+      <h3>Apa yang harus dilakukan saat berwisata ke gua?</h3>
+      <div class="quiz-options">
+        <button onclick="answer(false,this)">A. Mencoret dinding gua</button>
+        <button onclick="answer(true,this)">B. Menjaga kebersihan dan mengikuti panduan</button>
+        <button onclick="answer(false,this)">C. Mengambil batu atau ornamen gua</button>
+      </div>
+      <p id="quizResult" aria-live="polite" style="margin-top:12px;font-weight:700"></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card" style="text-align:center;background:linear-gradient(135deg,#123c60,#32245b)">
+      <div style="font-size:30px">🌿</div><h2>Jaga Gua, Jaga Cerita</h2>
+      <p>Keindahan alam adalah warisan bersama. Jelajahi dengan bijak dan tinggalkan hanya jejak yang baik.</p>
+      <a class="btn primary" href="#beranda">Kembali ke atas ↑</a>
+    </div>
+  </section>
+</main>
+<footer>Prototype website • Gua Digital Story Experience<br>Konten, nama lokasi, dan media masih dapat disesuaikan.</footer>
+<nav class="mobile-nav">
+  <a href="#beranda"><span>⌂</span>Beranda</a>
+  <a href="#peta"><span>⌖</span>Peta</a>
+  <a href="#cerita"><span>♫</span>Cerita</a>
+  <a href="#mapping"><span>✧</span>Mapping</a>
+  <a href="#kuis"><span>❖</span>Kuis</a>
+</nav>
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box"><button class="close" onclick="closeModal()">✕</button><h3 id="modalTitle">Informasi</h3><p id="modalText"></p><button class="btn primary" onclick="closeModal()">Mengerti</button></div>
+</div>
+<script>
+const stories=[
+{title:"Awal Sebuah Petualangan",text:"Di antara rimbunnya alam, tersembunyi sebuah gua yang menyimpan keindahan dan kisah masa lalu. Mari melangkah dengan rasa ingin tahu, tetap berhati-hati, dan menjaga alam."},
+{title:"Rahasia Formasi Batu",text:"Selama waktu yang sangat panjang, air dan proses alam membentuk lorong serta ornamen batu yang unik. Setiap lekuk menjadi pengingat betapa menakjubkannya proses alam."},
+{title:"Warisan yang Harus Dijaga",text:"Gua adalah rumah bagi makhluk hidup dan bagian dari warisan alam. Jangan membuang sampah, merusak formasi batu, atau mengganggu satwa. Keindahannya perlu dijaga bersama."}
+];
+let storyIndex=0, speaking=false, utterance=null;
+function toggleAudio(){
+ if(!('speechSynthesis' in window)){showModal("Audio tidak tersedia","Browser ini belum mendukung fitur narasi suara. Kamu tetap bisa membaca teks cerita.");return}
+ if(speaking){speechSynthesis.cancel();speaking=false;document.getElementById('audioBtn').textContent="▶ Putar Narasi";return}
+ speechSynthesis.cancel();utterance=new SpeechSynthesisUtterance(stories[storyIndex].text);utterance.lang="id-ID";utterance.rate=.9;
+ utterance.onend=()=>{speaking=false;document.getElementById('audioBtn').textContent="▶ Putar Narasi"};
+ speaking=true;document.getElementById('audioBtn').textContent="■ Hentikan";speechSynthesis.speak(utterance);
+}
+function nextStory(){if(speaking){speechSynthesis.cancel();speaking=false}storyIndex=(storyIndex+1)%stories.length;document.getElementById('narration').textContent=stories[storyIndex].text;document.querySelector('#cerita h3').textContent=stories[storyIndex].title;document.getElementById('storyCount').textContent=`Cerita ${storyIndex+1} dari ${stories.length} • Narasi menggunakan suara bawaan browser bila tersedia.`;document.getElementById('storyProgress').style.width=((storyIndex+1)/stories.length*100)+'%';document.getElementById('audioBtn').textContent="▶ Putar Narasi"}
+function setMapping(mode){const el=document.getElementById('mappingVisual');let bg,label;if(mode==='blue'){bg='radial-gradient(ellipse at 50% 75%,#22caffbb,transparent 40%),linear-gradient(145deg,#1a2856,#071426)';label='Mode: Cahaya Biru'}else if(mode==='purple'){bg='radial-gradient(ellipse at 50% 75%,#b45cffbb,transparent 40%),linear-gradient(145deg,#46245f,#071426)';label='Mode: Cahaya Ungu'}else{bg='radial-gradient(ellipse at 50% 75%,#3fffd0aa,transparent 35%),radial-gradient(ellipse at 25% 30%,#9d62ff88,transparent 40%),linear-gradient(145deg,#123d58,#071426)';label='Mode: Aurora'}el.style.background=bg;document.getElementById('mappingLabel').textContent=label}
+function answer(correct,btn){const result=document.getElementById('quizResult');if(correct){result.textContent="Benar! 🌟 Selalu ikuti panduan dan jaga kelestarian gua.";result.style.color="#79f2bd"}else{result.textContent="Belum tepat. Coba pilih tindakan yang menjaga alam.";result.style.color="#ffb3a7"}}
+function showModal(title,text){document.getElementById('modalTitle').textContent=title;document.getElementById('modalText').textContent=text;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+</script>
+</body>
+</html>
