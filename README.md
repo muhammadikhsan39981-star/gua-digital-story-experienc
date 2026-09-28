@@ -4,6 +4,10 @@
 
 <!DOCTYPE html>
 <html lang="id">
+ <link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -451,12 +455,12 @@ footer {
 <section id="mapping">
   <h2>Digital Mapping</h2>
 
-  <div class="card">
-
-    <div class="mapping" id="visual">
-      GUA DIGITAL<br>
-      <small id="mode">Cahaya Biru</small>
-    </div>
+  <div id="map-laumehe"
+     style="height:350px;
+            width:100%;
+            border-radius:15px;
+            overflow:hidden;">
+</div>
 
     <p>
       Pilih warna untuk melihat simulasi
@@ -498,12 +502,12 @@ footer {
     </h3>
 
     <button class="btn secondary"
-      onclick="jawab(false)">
-      A. Membuang sempah di area gua
+      onclick="jawab(true)">
+      A. Membuang sempah dan merawat gua
     </button>
 
     <button class="btn secondary"
-      onclick="jawab(true)">
+      onclick="jawab(false)">
       B. Merusak ornamen gua
     </button>
 
@@ -633,7 +637,7 @@ function jawab(benar) {
 
   if (benar) {
     hasil.textContent =
-      "Benar! 🌟 Selalu jaga kelestarian gua.";
+      "Benar! 🌟 membuang sampah dan merawat gua.";
     hasil.style.color = "#79f2bd";
   } else {
     hasil.textContent =
@@ -642,6 +646,30 @@ function jawab(benar) {
   }
 }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+  // GANTI dengan koordinat asli Gua Laumehe
+  const latitude = -5.000000;
+  const longitude = 122.000000;
+
+  const map = L.map("map-laumehe").setView(
+    [latitude, longitude], 16
+  );
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution: '&copy; OpenStreetMap'
+    }
+  ).addTo(map);
+
+  L.marker([latitude, longitude])
+    .addTo(map)
+    .bindPopup("<b>Gua Laumehe</b><br>Wisata alam dan sejarah")
+    .openPopup();
+
+});
+</script>
 </body>
 </html>
