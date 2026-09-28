@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -115,9 +119,12 @@ nav a span{display:block;font-size:19px;margin-bottom:1px}
 
   <section id="mapping">
     <div class="section-head"><div><div class="kicker">Visualisasi interaktif</div><h2>Digital Mapping</h2></div></div>
-    <div class="card">
-      <div class="story-img" id="mappingVisual" style="height:210px;background:radial-gradient(ellipse at 50% 75%,#22caffaa,transparent 40%),linear-gradient(145deg,#1a2856,#071426);">
-        <span id="mappingLabel">Mode: Cahaya Biru</span>
+    <div id="map-laumehe"
+     style="height:350px;
+            width:100%;
+            border-radius:15px;
+            overflow:hidden;">
+</div>
       </div>
       <p>Simulasi visual digital mapping. Pilih tema untuk melihat perubahan warna cahaya pada ilustrasi gua.</p>
       <div class="actions">
@@ -180,6 +187,31 @@ function setMapping(mode){const el=document.getElementById('mappingVisual');let 
 function answer(correct,btn){const result=document.getElementById('quizResult');if(correct){result.textContent="Benar! 🌟 Selalu ikuti panduan dan jaga kelestarian gua.";result.style.color="#79f2bd"}else{result.textContent="Belum tepat. Coba pilih tindakan yang menjaga alam.";result.style.color="#ffb3a7"}}
 function showModal(title,text){document.getElementById('modalTitle').textContent=title;document.getElementById('modalText').textContent=text;document.getElementById('modal').classList.add('open')}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // GANTI dengan koordinat asli Gua Laumehe
+  const latitude = -5.000000;
+  const longitude = 122.000000;
+
+  const map = L.map("map-laumehe").setView(
+    [latitude, longitude], 16
+  );
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution: '&copy; OpenStreetMap'
+    }
+  ).addTo(map);
+
+  L.marker([latitude, longitude])
+    .addTo(map)
+    .bindPopup("<b>Gua Laumehe</b><br>Wisata alam dan sejarah")
+    .openPopup();
+
+});
 </script>
 </body>
 </html>
